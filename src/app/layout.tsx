@@ -12,7 +12,7 @@ import {
 
 
 import {Providers} from "@/app/providers";
-import {AddIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIcon} from "@chakra-ui/icons";
+
 
 
 interface RootLayoutProps {
@@ -33,8 +33,8 @@ export default function RootLayout({children}: RootLayoutProps) {
                 {/*<Flex p={2} minW={'99vw'} maxH={'96vh'} justifyContent={'center'} alignContent={'center'} >*/}
                 {/*    <Flex justifyContent={'center'} alignContent={'center'} w={'99%'} p={2} bg={'white'} mt={'0.7%'}*/}
                 {/*          rounded={'25px'} maxH={'97.4vh'} boxShadow={'rgba(0, 0, 0, 0.15) 0px 2px 8px'}>*/}
-                <Flex justifyContent={'center'} alignContent={'center'} bg={'gray.100'} w={'100%'}
-                      boxShadow={'rgba(0, 0, 0, 0.15) 0px 2px 8px'}>
+                <Flex justifyContent={'center'} alignContent={'center'} bg={'gray.100'} w={'100vw'} h={'100%'}
+                      boxShadow={'inset rgba(0, 0, 0, 0.15) 0px 2px 5px'}>
                     {children}
                 </Flex>
                 {/*</Flex>*/}
