@@ -1,3 +1,7 @@
+.banner {
+  background-image: url("/images/arctic-hub-wp-lg.png") !important;
+}
+
 .main {
   display: flex;
   flex-direction: column;

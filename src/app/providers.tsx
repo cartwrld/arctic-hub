@@ -9,7 +9,9 @@ export function Providers({ children } : any) {
     return (
         <CacheProvider>
             <ChakraProvider>
+
                 {children}
+
             </ChakraProvider>
         </CacheProvider>
     )
