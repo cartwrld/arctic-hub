@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import styles from "../app/page.module.css"; // ensure this path is correct
 import { Box, Heading } from "@chakra-ui/react"; // ensure this path is correct
