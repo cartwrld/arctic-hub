@@ -23,12 +23,14 @@ export default function AppButton(props: { appName: string }) {
         const collection = [];
 
         console.log('fetching, please wait')
-        const initRes = await fetch('https://yts.mx/api/v2/list_movies.json?quality=2160p')
+        const initRes = await fetch('https://yts.mx/api/v2/list_movies.json?year=2010&quality=2160p&genre=comedy')
         if (!initRes.ok) {
             throw Error('errrrrorrrr');
         }
         console.log(initRes.body)
-        const movieCount = (await initRes.json()).data.movie_count
+        const data = await initRes.json()
+        console.log(data)
+        const movieCount = data.data.movie_count
 
         const pageCount = movieCount / 20
 

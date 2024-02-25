@@ -14,8 +14,7 @@ export default function SearchBar() {
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         // This will submit the form to the specified action URL
-        // @ts-ignore
-        formRef.current.submit();
+        //formRef.current.submit();
     };
 
     return (

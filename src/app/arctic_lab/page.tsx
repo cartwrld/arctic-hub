@@ -2,7 +2,7 @@
 // import { useRouter } from "next/navigation";
 import styles from "../page.module.css"; // ensure this path is correct
 
-export default function Browse() {
+export default function ArcticLab() {
     // const router = useRouter();
     //
     // // Define the routes for your tabs
@@ -19,6 +19,7 @@ export default function Browse() {
         <main className={styles.main}>
             {/*<TabNav onTabChange={handleTabChange} />*/}
             {/* Rest of your page content */}
+            this is the lab
         </main>
     );
 }
