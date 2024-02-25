@@ -4,6 +4,24 @@ import React, { useState, useEffect } from 'react';
 import styles from "../app/page.module.css";
 import {Box, Heading} from "@chakra-ui/react"; // ensure this path is correct
 
+
+function renderFileSystem(node:any) {
+    if (node.type === 'directory') {
+        return (
+            <div key={node.path}>
+                <strong>{node.name}/</strong>
+                {/* Recursively render children if there are any */}
+                {node.children && node.children.map(renderFileSystem)}
+            </div>
+        );
+    } else {
+        return (
+            <div key={node.path}>
+                {node.name}
+            </div>
+        );
+    }
+}
 export default function ArcticLab() {
     const [fileTree, setFileTree] = useState({});
 
@@ -25,22 +43,10 @@ export default function ArcticLab() {
         fetchData();
     }, []); //
 
-    function parseFileTree(ft : object) {
-        console.log(ft)
-        return (<Box>{ft.toString()}</Box>)
-    }
-
     return (
         <main className={styles.main}>
             <h1>This is the lab</h1>
-            {/* Render the file tree or a message if it's empty */}
-            {Object.keys(fileTree).length ?
-                (
-                    parseFileTree(fileTree)
-            ) : (
-                <p>No files to display.</p>
-            )
-            }
+            {fileTree ? renderFileSystem(fileTree) : <p>Loading...</p>}
         </main>
     );
 }

@@ -1,34 +1,41 @@
-// src/pages/api/files.ts
-
-import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
+import {NextApiRequest, NextApiResponse} from "next";
 
-const smbSharePath = '/arctic_lab'; // The path to your SMB share
-
-interface DirectoryResult {
-    [key: string]: string | DirectoryResult;
+interface FileSystemNode {
+    name: string;
+    type: 'file' | 'directory';
+    path: string;
+    children?: FileSystemNode[];
 }
 
-// A function to recursively read a directory
-function readDirectory(dir: string): DirectoryResult {
-    const result: DirectoryResult = {};
-    fs.readdirSync(dir).forEach(file => {
-        const fullPath = path.join(dir, file);
-        if (fs.statSync(fullPath).isDirectory()) {
-            result[file] = readDirectory(fullPath); // Recurse into subdirectories
+function getDirectoryContents(dirPath: string): FileSystemNode[] {
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    return entries.map(dirent => {
+        const fullPath = path.join(dirPath, dirent.name);
+        if (dirent.isDirectory()) {
+            return {
+                name: dirent.name,
+                type: 'directory' as const,
+                path: fullPath,
+                children: getDirectoryContents(fullPath) // Recursively get contents
+            };
         } else {
-            result[file] = fullPath; // Store the file path
+            return {
+                name: dirent.name,
+                type: 'file' as const,
+                path: fullPath
+            };
         }
     });
-    return result;
 }
 
+// ... in your API handler
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const arcticrpi = readDirectory(smbSharePath);
-        console.log(arcticrpi);
-        res.status(200).json(arcticrpi);
+        const smbSharePath = '/arctic_lab'; // The path to your SMB share
+        const directoryStructure = getDirectoryContents(smbSharePath);
+        res.status(200).json(directoryStructure);
     } catch (error) {
         console.error(error);
         if (error instanceof Error) {
