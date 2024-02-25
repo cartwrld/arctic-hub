@@ -6,11 +6,11 @@ import styles from "../app/page.module.css"; // ensure this path is correct
 export default function ArcticLab() {
     const [fileTree, setFileTree] = useState({});
 
-    useEffect(() => {
+    useEffect( () => {
         // Fetch the file list from the API
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/files');
+                const response = await fetch('../pages/api/files');
                 if (!response.ok) {
                     throw new Error(`Error: ${response.statusText}`);
                 }
