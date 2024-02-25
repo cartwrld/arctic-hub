@@ -25,15 +25,22 @@ export default function ArcticLab() {
         fetchData();
     }, []); //
 
+    function parseFileTree(ft : object) {
+        console.log(ft)
+        return (<Box>{ft.toString()}</Box>)
+    }
+
     return (
         <main className={styles.main}>
             <h1>This is the lab</h1>
             {/* Render the file tree or a message if it's empty */}
-            {Object.keys(fileTree).length ? (
-                <pre>{JSON.stringify(fileTree, null, 2)}</pre>
+            {Object.keys(fileTree).length ?
+                (
+                    parseFileTree(fileTree)
             ) : (
                 <p>No files to display.</p>
-            )}
+            )
+            }
         </main>
     );
 }
