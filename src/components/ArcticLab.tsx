@@ -22,7 +22,7 @@ export default function ArcticLab() {
         };
 
         fetchData();
-    }, []);
+    }, [fileTree]);
 
     return (
         <main className={styles.main}>
