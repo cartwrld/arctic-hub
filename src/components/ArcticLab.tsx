@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import styles from "../app/page.module.css";
 import {Box, Heading} from "@chakra-ui/react"; // ensure this path is correct
 
-
 function renderFileSystem(node:any) {
     if (node.type === 'directory') {
         return (
@@ -43,10 +42,18 @@ export default function ArcticLab() {
         fetchData();
     }, []); //
 
+
     return (
         <main className={styles.main}>
             <h1>This is the lab</h1>
-            {fileTree ? renderFileSystem(fileTree) : <p>Loading...</p>}
+            {/* Render the file tree or a message if it's empty */}
+            {Object.keys(fileTree).length ?
+                (
+                    renderFileSystem(fileTree)
+            ) : (
+                <p>No files to display.</p>
+            )
+            }
         </main>
     );
 }
