@@ -35,23 +35,28 @@ export default function ArcticLab() {
     function parseFileTree(ft: { [key: string]: any }, parentPath = ''): { [key: string]: FileDetail } {
         const result: { [key: string]: FileDetail } = {};
 
+        const collection = []
+
         Object.keys(ft).forEach(key => {
-            const fullPath = parentPath + '/' + key;
-            if (typeof ft[key] === 'object' && ft[key] !== null) { // It's a directory
-                result[key] = {
-                    name: key,
-                    ext: '/',
-                    fullpath: fullPath,
-                    children: parseFileTree(ft[key], fullPath) // Recursively parse children
-                };
-            } else { // It's a file
-                const ext = key.includes('.') ? key.substring(key.lastIndexOf('.')) : '';
-                result[key] = {
-                    name: key,
-                    ext: ext,
-                    fullpath: fullPath
-                };
-            }
+            console.log(typeof key)
+
+
+            // const fullPath = parentPath + '/' + key;
+            // if (typeof ft[key] === 'object' && ft[key] !== null) { // It's a directory
+            //     result[key] = {
+            //         name: key,
+            //         ext: '/',
+            //         fullpath: fullPath,
+            //         children: parseFileTree(ft[key], fullPath) // Recursively parse children
+            //     };
+            // } else { // It's a file
+            //     const ext = key.includes('.') ? key.substring(key.lastIndexOf('.')) : '';
+            //     result[key] = {
+            //         name: key,
+            //         ext: ext,
+            //         fullpath: fullPath
+            //     };
+            // }
         });
 
         return result;
