@@ -31,7 +31,7 @@ export default function ArcticLab() {
         return Object.keys(fileTree).map((k) => {
 
             const pattern = /.*\.\w+$/; // This is the regex for a string ending with ".*"
-            let color = pattern.test(k) ? 'lightblue' : 'lightgreen'
+            let color = pattern.test(k) ? '#28a5ff' : '#0186ff'
 
             return (<FSItem key={k} item={k} color={color}/>)
         })
@@ -42,7 +42,7 @@ export default function ArcticLab() {
 
         <Flex direction="column" p={5}>
             <Heading mb={5}>This is the lab</Heading>
-            <Flex flexDir={'column'} alignItems={'center'}>
+            <Flex flexDir={'column'} justifyContent={'start'}>
                 {
                     Object.keys(fileTree).length > 0
                         ? handleTree()
@@ -61,7 +61,7 @@ function FSItem(props: {item: string, color: string}) {
 
     return (
         <Button bg={color} key={item}>
-            <Flex justifyContent={'center'} alignItems={'center'} w={'fit-content'} maxW={200} h={30} p={4} m={4} >
+            <Flex justifyContent={'center'} color={'gray.100'} alignItems={'center'} w={'fit-content'} maxW={200} h={30} p={4} m={4} >
             {item}
         </Flex>
         </Button>
