@@ -1,14 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from "../app/page.module.css"; // ensure this path is correct
-import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react"; // ensure this path is correct
+import {Box, Center, Flex, Heading, Text, VStack} from "@chakra-ui/react"; // ensure this path is correct
 
 interface FileDetail {
     name: string;
     ext: string;
     fullpath: string;
 }
+
 interface DirDetail {
     name: string;
     fullpath: string;
@@ -37,16 +38,30 @@ export default function ArcticLab() {
         fetchData();
     }, []);
 
+    function handleTree() {
+        return Object.keys(fileTree).map((k) =>
+            <Flex justifyContent={'center'} alignItems={'center'} w={150} h={150} p={4} m={4} bg={'red'} key={k}>
+                {k}
+            </Flex>
+        )
+
+    }
 
 
     return (
         <main className={styles.main}>
             <Flex direction="column" p={5}>
                 <Heading mb={5}>This is the lab</Heading>
-                {/*{Object.keys(fileTree).length > 0 && renderFileTree(parseFileTree(fileTree))}*/}
+                {
+                    Object.keys(fileTree).length > 0
+                        ? handleTree()
+                        : (<Center>No files found.</Center>)
+                }
             </Flex>
         </main>
-    );
+    )
 }
+
+
 
 
