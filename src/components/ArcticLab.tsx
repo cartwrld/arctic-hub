@@ -28,7 +28,7 @@ export default function ArcticLab() {
                 }
                 const data = await response.json();
                 setFileTree(data);
-                console.log(fileTree)
+                console.log(data)
             } catch (error) {
                 console.error("Failed to fetch files", error);
             }
