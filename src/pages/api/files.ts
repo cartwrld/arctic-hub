@@ -6,19 +6,37 @@ import path from 'path';
 
 const smbSharePath = '/arctic_lab'; // The path to your SMB share
 
-interface DirectoryResult {
-    [key: string]: string | DirectoryResult;
+interface FileDetail {
+    name: string;
+    ext: string;
+    fullpath: string;
+    children?: { [key: string]: FileDetail };
 }
 
-// A function to recursively read a directory
-function readDirectory(dir: string): DirectoryResult {
+interface DirectoryResult {
+    [key: string]: FileDetail;
+}
+
+// A function to recursively read a directory and return detailed file information
+function readDirectory(dir: string, parentPath = ''): DirectoryResult {
     const result: DirectoryResult = {};
-    fs.readdirSync(dir).forEach(file => {
-        const fullPath = path.join(dir, file);
-        if (fs.statSync(fullPath).isDirectory()) {
-            result[file] = readDirectory(fullPath); // Recurse into subdirectories
+    fs.readdirSync(dir, { withFileTypes: true }).forEach(dirent => {
+        const fullPath = path.join(dir, dirent.name);
+        const relativePath = path.join(parentPath, dirent.name);
+        if (dirent.isDirectory()) {
+            result[dirent.name] = {
+                name: dirent.name,
+                ext: '/',
+                fullpath: relativePath + '/',
+                children: readDirectory(fullPath, relativePath)
+            };
         } else {
-            result[file] = fullPath; // Store the file path
+            const ext = path.extname(dirent.name);
+            result[dirent.name] = {
+                name: path.basename(dirent.name, ext),
+                ext: ext,
+                fullpath: relativePath
+            };
         }
     });
     return result;
@@ -26,9 +44,8 @@ function readDirectory(dir: string): DirectoryResult {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const arcticrpi = readDirectory(smbSharePath);
-        console.log(arcticrpi);
-        res.status(200).json(arcticrpi);
+        const directoryStructure = readDirectory(smbSharePath);
+        res.status(200).json(directoryStructure);
     } catch (error) {
         console.error(error);
         if (error instanceof Error) {
