@@ -25,6 +25,8 @@ async function readDirectoryAsync(dir: string, parentPath = ''): Promise<Directo
         const fullPath = path.join(dir, dirent.name);
         const relativePath = path.join(parentPath, dirent.name);
 
+        console.log(relativePath)
+
         if (dirent.isDirectory()) {
             result[dirent.name] = {
                 name: dirent.name,
@@ -41,6 +43,7 @@ async function readDirectoryAsync(dir: string, parentPath = ''): Promise<Directo
             };
         }
     }
+    console.log(result)
     return result;
 }
 
