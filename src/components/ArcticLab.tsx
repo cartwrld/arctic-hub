@@ -1,14 +1,16 @@
-'use client'
-
 import React, { useState, useEffect } from 'react';
 import styles from "../app/page.module.css"; // ensure this path is correct
-import { Box, Heading } from "@chakra-ui/react"; // ensure this path is correct
+import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react"; // ensure this path is correct
 
 interface FileDetail {
     name: string;
     ext: string;
     fullpath: string;
-    children?: { [key: string]: FileDetail };
+}
+interface DirDetail {
+    name: string;
+    fullpath: string;
+    children: any[]; // Adjusted for compatibility
 }
 
 export default function ArcticLab() {
@@ -32,60 +34,54 @@ export default function ArcticLab() {
         fetchData();
     }, []);
 
-    function parseFileTree(ft: { [key: string]: any }, parentPath = ''): { [key: string]: FileDetail } {
-        const result: { [key: string]: FileDetail } = {};
-
-        const collection = []
+    function parseFileTree(ft: any, currentRoot = ''): any[] {
+        const collection: any[] = [];
 
         Object.keys(ft).forEach(key => {
-            console.log(typeof key)
+            let item;
 
-
-            // const fullPath = parentPath + '/' + key;
-            // if (typeof ft[key] === 'object' && ft[key] !== null) { // It's a directory
-            //     result[key] = {
-            //         name: key,
-            //         ext: '/',
-            //         fullpath: fullPath,
-            //         children: parseFileTree(ft[key], fullPath) // Recursively parse children
-            //     };
-            // } else { // It's a file
-            //     const ext = key.includes('.') ? key.substring(key.lastIndexOf('.')) : '';
-            //     result[key] = {
-            //         name: key,
-            //         ext: ext,
-            //         fullpath: fullPath
-            //     };
-            // }
+            if (key.endsWith(".*")) {
+                item = {
+                    name: key.substring(0, key.lastIndexOf('.')),
+                    ext: key.substring(key.lastIndexOf('.') + 1), // Fixed to correctly capture extension
+                    fullpath: `${currentRoot}/${key}`,
+                };
+            } else {
+                item = {
+                    name: key,
+                    fullpath: `${currentRoot}/${key}`,
+                    children: parseFileTree(ft[key], `${currentRoot}/${key}/`) // Fixed and added slash for correct path
+                };
+            }
+            collection.push(item);
         });
 
-        return result;
+        return collection;
     }
 
-    function renderFileTree(node: FileDetail) {
-        if (node.children) {
-            return (
-                <Box>
-                    <Heading size="md">{node.name}</Heading>
-                    <Box pl={4}>
-                        {Object.values(node.children).map(child => renderFileTree(child))}
-                    </Box>
+    const renderFileTree = (nodes: any[]) => (
+        <VStack align='start'>
+            {nodes.map((node, index) => (
+                <Box key={index}>
+                    {node.children ? (
+                        <VStack align='start'>
+                            <Text fontWeight='bold'>{node.name}/</Text>
+                            {renderFileTree(node.children)}
+                        </VStack>
+                    ) : (
+                        <Text>{node.name}.{node.ext}</Text>
+                    )}
                 </Box>
-            );
-        } else {
-            return <Box>{node.name}{node.ext}</Box>;
-        }
-    }
-
-    const parsedTree = parseFileTree(fileTree);
+            ))}
+        </VStack>
+    );
 
     return (
         <main className={styles.main}>
-            <Heading>This is the lab</Heading>
-            {Object.keys(parsedTree).length > 0 ?
-                Object.values(parsedTree).map(renderFileTree) :
-                <p>No files to display.</p>
-            }
+            <Flex direction="column" p={5}>
+                <Heading mb={5}>This is the lab</Heading>
+                {Object.keys(fileTree).length > 0 && renderFileTree(parseFileTree(fileTree))}
+            </Flex>
         </main>
     );
 }
