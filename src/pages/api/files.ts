@@ -1,8 +1,8 @@
 // src/pages/api/files.ts
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
+import type {NextApiRequest, NextApiResponse} from 'next';
 import path from 'path';
+import {promises as fsPromises} from 'fs';
 
 const smbSharePath = '/arctic_lab'; // The path to your SMB share
 
@@ -17,20 +17,20 @@ interface DirectoryResult {
     [key: string]: FileDetail;
 }
 
-// A function to recursively read a directory and return detailed file information
-function readDirectory(dir: string, parentPath = ''): DirectoryResult {
+async function readDirectoryAsync(dir: string, parentPath = ''): Promise<DirectoryResult> {
     const result: DirectoryResult = {};
-    fs.readdirSync(dir, { withFileTypes: true }).forEach(dirent => {
+    const dirents = await fsPromises.readdir(dir, { withFileTypes: true });
+
+    for (const dirent of dirents) {
         const fullPath = path.join(dir, dirent.name);
         const relativePath = path.join(parentPath, dirent.name);
-        // console.log(fullPath)
-        // console.log(relativePath)
-	if (dirent.isDirectory()) {
+
+        if (dirent.isDirectory()) {
             result[dirent.name] = {
                 name: dirent.name,
                 ext: '/',
                 fullpath: relativePath + '/',
-                children: readDirectory(fullPath, relativePath)
+                children: await readDirectoryAsync(fullPath, relativePath)
             };
         } else {
             const ext = path.extname(dirent.name);
@@ -40,21 +40,20 @@ function readDirectory(dir: string, parentPath = ''): DirectoryResult {
                 fullpath: relativePath
             };
         }
-    });
-    console.log(result)
+    }
     return result;
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const directoryStructure = readDirectory(smbSharePath);
+        const directoryStructure = await readDirectoryAsync(smbSharePath);
         res.status(200).json(directoryStructure);
     } catch (error) {
         console.error(error);
         if (error instanceof Error) {
-            res.status(500).json({ error: 'Error reading directory', message: error.message });
+            res.status(500).json({error: 'Error reading directory', message: error.message});
         } else {
-            res.status(500).json({ error: 'Error reading directory', message: 'An unknown error occurred' });
+            res.status(500).json({error: 'Error reading directory', message: 'An unknown error occurred'});
         }
     }
 }
