@@ -26,6 +26,7 @@ export default function ArcticLab() {
                 }
                 const data = await response.json();
                 setFileTree(data);
+                console.log(fileTree)
             } catch (error) {
                 console.error("Failed to fetch files", error);
             }
@@ -34,53 +35,53 @@ export default function ArcticLab() {
         fetchData();
     }, []);
 
-    function parseFileTree(ft: any, currentRoot = ''): any[] {
-        const collection: any[] = [];
-
-        Object.keys(ft).forEach(key => {
-            let item;
-
-            if (key.endsWith(".*")) {
-                item = {
-                    name: key.substring(0, key.lastIndexOf('.')),
-                    ext: key.substring(key.lastIndexOf('.') + 1), // Fixed to correctly capture extension
-                    fullpath: `${currentRoot}/${key}`,
-                };
-            } else {
-                item = {
-                    name: key,
-                    fullpath: `${currentRoot}/${key}`,
-                    children: parseFileTree(ft[key], `${currentRoot}/${key}/`) // Fixed and added slash for correct path
-                };
-            }
-            collection.push(item);
-        });
-
-        return collection;
-    }
-
-    const renderFileTree = (nodes: any[]) => (
-        <VStack align='start'>
-            {nodes.map((node, index) => (
-                <Box key={index}>
-                    {node.children ? (
-                        <VStack align='start'>
-                            <Text fontWeight='bold'>{node.name}/</Text>
-                            {renderFileTree(node.children)}
-                        </VStack>
-                    ) : (
-                        <Text>{node.name}.{node.ext}</Text>
-                    )}
-                </Box>
-            ))}
-        </VStack>
-    );
+    // function parseFileTree(ft: any, currentRoot = ''): any[] {
+    //     const collection: any[] = [];
+    //
+    //     Object.keys(ft).forEach(key => {
+    //         let item;
+    //
+    //         if (key.endsWith(".*")) {
+    //             item = {
+    //                 name: key.substring(0, key.lastIndexOf('.')),
+    //                 ext: key.substring(key.lastIndexOf('.') + 1), // Fixed to correctly capture extension
+    //                 fullpath: `${currentRoot}/${key}`,
+    //             };
+    //         } else {
+    //             item = {
+    //                 name: key,
+    //                 fullpath: `${currentRoot}/${key}`,
+    //                 children: parseFileTree(ft[key], `${currentRoot}/${key}/`) // Fixed and added slash for correct path
+    //             };
+    //         }
+    //         collection.push(item);
+    //     });
+    //
+    //     return collection;
+    // }
+    //
+    // const renderFileTree = (nodes: any[]) => (
+    //     <VStack align='start'>
+    //         {nodes.map((node, index) => (
+    //             <Box key={index}>
+    //                 {node.children ? (
+    //                     <VStack align='start'>
+    //                         <Text fontWeight='bold'>{node.name}/</Text>
+    //                         {renderFileTree(node.children)}
+    //                     </VStack>
+    //                 ) : (
+    //                     <Text>{node.name}.{node.ext}</Text>
+    //                 )}
+    //             </Box>
+    //         ))}
+    //     </VStack>
+    // );
 
     return (
         <main className={styles.main}>
             <Flex direction="column" p={5}>
                 <Heading mb={5}>This is the lab</Heading>
-                {Object.keys(fileTree).length > 0 && renderFileTree(parseFileTree(fileTree))}
+                {/*{Object.keys(fileTree).length > 0 && renderFileTree(parseFileTree(fileTree))}*/}
             </Flex>
         </main>
     );
