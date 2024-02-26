@@ -42,16 +42,17 @@ export default function ArcticLab() {
 
         <Flex direction="column" p={5}>
             <Heading mb={5}>This is the lab</Heading>
-            <Center>
+            <Flex flexDir={'column'} alignItems={'center'}>
                 {
                     Object.keys(fileTree).length > 0
                         ? handleTree()
                         : (<Center>No files found.</Center>)
                 }
-            </Center>
+            </Flex>
         </Flex>
 
     )
+}
 
 
 function FSItem(props: {item: string, color: string}) {
@@ -60,7 +61,7 @@ function FSItem(props: {item: string, color: string}) {
 
     return (
         <Button bg={color} key={item}>
-            <Flex justifyContent={'center'} alignItems={'center'} w={'fit-content'} maxW={200} h={50} p={4} m={4} >
+            <Flex justifyContent={'center'} alignItems={'center'} w={'fit-content'} maxW={200} h={30} p={4} m={4} >
             {item}
         </Flex>
         </Button>
