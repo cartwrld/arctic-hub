@@ -41,7 +41,8 @@ export default function ArcticLab() {
     function handleTree() {
         return Object.keys(fileTree).map((k) =>{
 
-            let color = k.endsWith(".*") ? 'lightblue' : 'lightgreen'
+            const pattern = /.*\.\*$/; // This is the regex for a string ending with ".*"
+            let color = pattern.test(k) ? 'lightblue' : 'lightgreen'
 
             return (<Flex justifyContent={'center'} alignItems={'center'} w={100} h={100} p={4} m={4} bg={color} key={k}>
                 {k}
