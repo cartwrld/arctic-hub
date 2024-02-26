@@ -39,12 +39,14 @@ export default function ArcticLab() {
     }, []);
 
     function handleTree() {
-        return Object.keys(fileTree).map((k) =>
-            <Flex justifyContent={'center'} alignItems={'center'} w={150} h={150} p={4} m={4} bg={'red'} key={k}>
-                {k}
-            </Flex>
-        )
+        return Object.keys(fileTree).map((k) =>{
 
+            let color = k.endsWith(".*") ? 'lightblue' : 'lightgreen'
+
+            return (<Flex justifyContent={'center'} alignItems={'center'} w={100} h={100} p={4} m={4} bg={color} key={k}>
+                {k}
+            </Flex>)
+        })
     }
 
 
@@ -52,11 +54,13 @@ export default function ArcticLab() {
         <main className={styles.main}>
             <Flex direction="column" p={5}>
                 <Heading mb={5}>This is the lab</Heading>
-                {
-                    Object.keys(fileTree).length > 0
-                        ? handleTree()
-                        : (<Center>No files found.</Center>)
-                }
+                <Center>
+                    {
+                        Object.keys(fileTree).length > 0
+                            ? handleTree()
+                            : (<Center>No files found.</Center>)
+                    }
+                </Center>
             </Flex>
         </main>
     )
