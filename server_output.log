@@ -1,0 +1,16 @@
+
+> arctic-hub@0.1.0 dev
+> next dev -p 3000 -H 0.0.0.0
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+
+ ✓ Ready in 9.4s
+ ○ Compiling / ...
+ ✓ Compiled /arcticlab in 68.9s (2678 modules)
+ ○ Compiling /not-found ...
+ ✓ Compiled /not-found in 2.3s (2683 modules)
+ ○ Compiling /api/files ...
+ ✓ Compiled /api/files in 4.5s (2767 modules)
+ ✓ Compiled in 7.8s (1407 modules)

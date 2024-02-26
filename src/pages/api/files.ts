@@ -23,7 +23,9 @@ function readDirectory(dir: string, parentPath = ''): DirectoryResult {
     fs.readdirSync(dir, { withFileTypes: true }).forEach(dirent => {
         const fullPath = path.join(dir, dirent.name);
         const relativePath = path.join(parentPath, dirent.name);
-        if (dirent.isDirectory()) {
+        // console.log(fullPath)
+        // console.log(relativePath)
+	if (dirent.isDirectory()) {
             result[dirent.name] = {
                 name: dirent.name,
                 ext: '/',
@@ -39,6 +41,7 @@ function readDirectory(dir: string, parentPath = ''): DirectoryResult {
             };
         }
     });
+    console.log(result)
     return result;
 }
 
