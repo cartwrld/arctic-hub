@@ -61,7 +61,7 @@ export default function AppButton(props: { appName: string , link: string}) {
             <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'} rounded={0} >
                 <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'} rounded={20} boxShadow={'md'}
                       fontWeight={'semibold'} p={0} mb={3}>
-                    <Image src={`/images/${appName}.png`} alt={'music'} width={75} height={75}/>
+                    <Image src={`/images/${appName}.png`} alt={'music'} width={70} height={70}/>
                 </Flex>
                 <Flex justifyContent={'center'} alignItems={'center'} p={0} m={0} >
                     <Heading fontWeight={'600'} p={0} m={0} lineHeight={0} mb={4}
