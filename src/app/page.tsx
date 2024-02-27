@@ -5,6 +5,7 @@ import SearchBar from "@/components/SearchBar";
 // import {SmallAddIcon} from "@chakra-ui/icons";
 import {FaPlus} from "react-icons/fa6";
 import AppButton from "@/components/AppButton"
+import ArcticBanner from "@/components/ArcticBanner";
 
 
 export default function Home() {
@@ -14,13 +15,9 @@ export default function Home() {
 
     return (
 
-        <Flex w={'100%'} h={"100%"} rounded={6} bg={'gray.200'}>
+        <Flex w={'100%'} h={'100%'} rounded={6} bg={'gray.200'}>
             <Flex flexDir={'column'} w={'100%'}>
-                <Center bg={'none'} className={styles.banner} w={'100%'}>
-                    <Center h={'100%'} w={'100%'} my={10}>
-                        <Heading fontSize={'4rem'} m={5} color={"ghostwhite"} textShadow={'0 0 10px rgb(25, 55, 93, 0.5)'}>Arctic-Hub</Heading>
-                    </Center>
-                </Center>
+                <ArcticBanner/>
 
                 <Flex justifyContent={'center'} alignItems={'center'} bg={'gray.300'} flexDir={'column'} py={5}>
                     <Flex w={'80%'}>
