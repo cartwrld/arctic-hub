@@ -1,16 +1,22 @@
-
 import styles from "../page.module.css";
 import ArcticLab from "@/components/ArcticLab";
-import {Flex} from "@chakra-ui/react"; // ensure this path is correct
+import {Breadcrumb, BreadcrumbItem, BreadcrumbSeparator, Flex} from "@chakra-ui/react"; // ensure this path is correct
 
 export default function ArcLab() {
 
     return (
-        <main className={styles.main}>
-           <Flex w={'100vw'} justifyContent={'center'} alignItems={'center'}>
-               <ArcticLab/>
-           </Flex>
-        </main>
+        <Flex w={'100%'} h={"100%"} justifyContent={'center'} alignItems={'center'}>
+            <Breadcrumb>
+                <BreadcrumbItem>root</BreadcrumbItem>
+                <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                <BreadcrumbItem>torrents</BreadcrumbItem>
+                <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                <BreadcrumbItem>undownloaded</BreadcrumbItem>
+                <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                <BreadcrumbItem>basedir</BreadcrumbItem>
+            </Breadcrumb>
+            <ArcticLab/>
+        </Flex>
     );
 }
 
