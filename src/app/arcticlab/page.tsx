@@ -6,25 +6,17 @@ import ArcticCrumb from "@/components/ArcticCrumb"; // ensure this path is corre
 
 export default function ArcLab() {
     const bcItems = [
-        { text: "Home", href: "/", isCurrentPage: false },
-        { text: "Category", href: "/category", isCurrentPage: false },
-        { text: "Subcategory", href: "/category/subcategory", isCurrentPage: true }
+        {text: "Home", href: "/", isCurrentPage: false},
+        {text: "ArcticLab", href: "/arcticlab", isCurrentPage: true},
+
     ];
 
+
     return (
-        <Flex w={'100%'} h={"100%"} justifyContent={'center'} alignItems={'center'}>
-            <Flex flexDir={'column'} w={'100%'}>
-                <ArcticBanner/>
-                <Box>
-                    <ArcticCrumb items={bcItems}/>
-                    {/*<Breadcrumb>*/}
-                    {/*    <BreadcrumbItem isCurrentPage>*/}
-                    {/*        <BreadcrumbLink href='#'>arctic_lab</BreadcrumbLink>*/}
-                    {/*    </BreadcrumbItem>*/}
-                    {/*</Breadcrumb>*/}
-                </Box>
-                <ArcticLab/>
-            </Flex>
+        <Flex flexDir={'column'} w={'100%'} bg={'purple.50'}>
+            <ArcticBanner/>
+            <ArcticCrumb items={bcItems}/>
+            <ArcticLab/>
         </Flex>
     );
 }

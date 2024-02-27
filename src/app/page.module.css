@@ -1,5 +1,7 @@
 .banner {
-  background-image: url("/images/arctic-hub-wp-lg.png") !important;
+  background-image: url("/images/arctic-hub-wp-xl.png") !important;
+  background-size: cover;
+  background-position: center;
 }
 
 .main {

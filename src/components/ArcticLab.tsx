@@ -2,7 +2,21 @@
 
 import React, {useState, useEffect} from 'react';
 import styles from "../app/page.module.css"; // ensure this path is correct
-import {Box, Button, Center, Flex, Heading, Text, VStack} from "@chakra-ui/react"; // ensure this path is correct
+import {
+    Box,
+    Button,
+    Center,
+    Flex,
+    Heading,
+    Table,
+    TableContainer,
+    Tbody, Td,
+    Text,
+    Thead,
+    Tr,
+    VStack
+} from "@chakra-ui/react";
+import Link from "next/link"; // ensure this path is correct
 
 
 export default function ArcticLab() {
@@ -29,7 +43,6 @@ export default function ArcticLab() {
 
     function handleTree() {
         return Object.keys(fileTree).map((k) => {
-
             const pattern = /.*\.\w+$/; // This is the regex for a string ending with ".*"
             let color = pattern.test(k) ? '#28a5ff' : '#0186ff'
 
@@ -41,17 +54,21 @@ export default function ArcticLab() {
     return (
 
         <Flex direction="column" p={5}>
-            <Heading mb={5}>This is the lab</Heading>
             <Flex flexDir={'column'}>
-                {
-                    Object.keys(fileTree).length > 0
-                        ? handleTree()
-                        : (<Center>No files found.</Center>)
-                }
-            </Flex>
-        </Flex>
+                <TableContainer>
+                <Table variant={'simple'}>
+                    <Tbody>
+                        {
+                            Object.keys(fileTree).length > 0 ? handleTree() : (<Tr><Td>No files found.</Td></Tr>)
+                        }
+                    </Tbody>
+                </Table>
+            </TableContainer>
 
+            </Flex>
+         </Flex>
     )
+
 }
 
 
@@ -60,11 +77,18 @@ function FSItem(props: { item: string, color: string }) {
     const {item, color} = props
 
     return (
-        <Button bg={color} key={item} textAlign={'start'}>
-            <Flex textAlign={'start'} color={'gray.100'} w={'fit-content'} maxW={200} h={30} p={4} m={4} >
-            {item}
-        </Flex>
-        </Button>
+        // <Link href={'arcticlab'}>
+
+        <Tr>
+            <Td>{item}</Td>
+        </Tr>
+
+        // </Link>
+        // <Button bg={color} key={item} textAlign={'start'}>
+        //     <Flex w={'100%'} textAlign={'start'} color={'gray.100'} maxW={200} h={30} p={4} m={4}>
+        //
+        //     </Flex>
+        // </Button>
     )
 }
 

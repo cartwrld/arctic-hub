@@ -27,27 +27,21 @@ export const metadata = {
 export default function RootLayout({children}: RootLayoutProps) {
 
     return (
-<html>
-<body>
+        <html>
+        <body>
         <Providers>
 
 
-            {/*<Flex p={2} minW={'99vw'} maxH={'96vh'} justifyContent={'center'} alignContent={'center'} >*/}
-            {/*    <Flex justifyContent={'center'} alignContent={'center'} w={'99%'} p={2} bg={'white'} mt={'0.7%'}*/}
-            {/*          rounded={'25px'} maxH={'97.4vh'} boxShadow={'rgba(0, 0, 0, 0.15) 0px 2px 8px'}>*/}
-            <Flex justifyContent={'center'} alignContent={'center'} bg={'gray.100'} w={'100vw'} h={'100%'}
-                  boxShadow={'inset rgba(0, 0, 0, 0.15) 0px 2px 5px'}>
-
-                {children}
-
+            <Flex w={'100vw'} h={"100vh"} justifyContent={'center'} alignItems={'center'}>
+                <Flex justifyContent={'center'} alignContent={'center'} bg={'gray.100'} w={'100vw'} h={'100%'}
+                      boxShadow={'inset rgba(0, 0, 0, 0.15) 0px 2px 5px'}>
+                    {children}
+                </Flex>
             </Flex>
-            {/*</Flex>*/}
-            {/*</Flex>*/}
-
 
 
         </Providers>
-</body>
-</html>
+        </body>
+        </html>
     );
 }
