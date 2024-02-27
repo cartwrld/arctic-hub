@@ -50,20 +50,20 @@ export default function ArcticLab() {
                 }
             </Flex>
         </Flex>
-
     )
 }
 
 
-function FSItem(props: {item: string, color: string}) {
+function FSItem(props: { item: string, color: string }) {
 
-        const {item, color} = props
+    const {item, color} = props
 
     return (
         <Button bg={color} key={item}>
-            <Flex justifyContent={'center'} color={'gray.100'} alignItems={'center'} w={'fit-content'} maxW={200} h={30} p={4} m={4} >
-            {item}
-        </Flex>
+            <Flex justifyContent={'start'} textAlign={'start'} color={'gray.100'} alignItems={'center'} w={'fit-content'} maxW={200} h={30}
+                  p={4} m={4}>
+                {item}
+            </Flex>
         </Button>
     )
 }

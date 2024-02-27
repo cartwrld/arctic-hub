@@ -23,7 +23,6 @@ export default function Home() {
                 </Center>
 
                 <Flex justifyContent={'center'} alignItems={'center'} bg={'gray.300'} flexDir={'column'} py={5}>
-                    {/*<Tagger apps={apps}/>*/}
                     <Flex w={'80%'}>
                         <SearchBar/>
                     </Flex>
@@ -32,57 +31,10 @@ export default function Home() {
                     <AppButton appName={'music'} key={'music'}/>
                     <AppButton appName={'movies'} key={'movies'}/>
                     <AppButton appName={'tvshows'} key={'tvshows'}/>
-                    <AppButton appName={'music'} key={'music1'}/>
-                    <AppButton appName={'movies'} key={'movies1'}/>
-                    <AppButton appName={'tvshows'} key={'tvshows1'}/>
-                    <AppButton appName={'music'} key={'music2'}/>
-                    <AppButton appName={'movies'} key={'movies2'}/>
-                    <AppButton appName={'tvshows'} key={'tvshows2'}/>
-                    <AppButton appName={'music'} key={'music3'}/>
-                    <AppButton appName={'movies'} key={'movies3'}/>
-                    <AppButton appName={'tvshows'} key={'tvshows3'}/>
+                    <AppButton appName={'arcticlab'} key={'arcticlab'}/>
                 </Flex>
             </Flex>
         </Flex>
 
     );
 }
-
-function Tagger(data: { apps: string[] }) {
-    const {apps} = data
-
-    return (
-        <HStack spacing={1}>
-            {apps.map((app) => (
-                <Tag size={'md'} key={app} variant='subtle' bg={'blue.200'}>
-                    <FaPlus fontSize={'1em'}/>
-                    <TagLabel pl={2}>{app}</TagLabel>
-                </Tag>
-            ))}
-        </HStack>
-    )
-}
-
-
-// function ArcticApp(props: { appName: string , onClick: any}) {
-//
-//     const {appName, onClick} = props
-//
-//
-//
-//     return (
-//         <Button w={'fit-content'} h={'fit-content'} m={0} rounded={9} minW={112} bg={'none'} onClick={onClick}>
-//             <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'}>
-//                 <Flex justifyContent={'center'} alignItems={'center'} flexDir={'column'} p={5} pb={3}
-//                       fontWeight={'semibold'}>
-//                     <Image src={`/images/${appName}.png`} alt={'music'} width={50} height={50}/>
-//                 </Flex>
-//
-//                 <Flex justifyContent={'center'} alignItems={'center'} p={0} m={0}>
-//                     <Heading fontWeight={'600'} p={0} m={0} lineHeight={0} mb={5}
-//                              fontSize={'regular'}>{handleAppName(appName)}</Heading>
-//                 </Flex>
-//             </Flex>
-//         </Button>
-//     )
-// }
