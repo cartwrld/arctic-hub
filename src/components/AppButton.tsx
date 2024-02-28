@@ -25,34 +25,6 @@ export default function AppButton(props: { appName: string , link: string}) {
 
     async function getMovies() {
 
-        // const collection = [];
-        //
-        // console.log('fetching, please wait')
-        // const initRes = await fetch('https://yts.mx/api/v2/list_movies.json?year=2010&quality=2160p&genre=comedy')
-        // if (!initRes.ok) {
-        //     throw Error('errrrrorrrr');
-        // }
-        // console.log(initRes.body)
-        // const data = await initRes.json()
-        // console.log(data)
-        // const movieCount = data.data.movie_count
-        //
-        // const pageCount = movieCount / 20
-        //
-        // for (let i=1; i<=10; i++) {
-        //     console.log(pageCount)
-        //
-        //     const pageRes = await fetch(`https://yts.mx/api/v2/list_movies.json?quality=1080p&year=2010&page=${i}`)
-        //
-        //     if (!pageRes.ok) {
-        //         throw Error('errrrrorrrr');
-        //     }
-        //     collection.push((await pageRes.json()).data.movies)
-        //
-        // }
-        //
-        // console.log(collection)
-
     }
 
     return (
