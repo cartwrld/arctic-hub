@@ -14,3 +14,15 @@
  ○ Compiling /api/files ...
  ✓ Compiled /api/files in 4.5s (2767 modules)
  ✓ Compiled in 7.8s (1407 modules)
+
+> arctic-hub@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 9.2s
+ ○ Compiling /arcticlab ...
+ ✓ Compiled /arcticlab in 40.8s (2669 modules)
+ ○ Compiling /not-found ...
+ ✓ Compiled /not-found in 18.6s (2758 modules)
